@@ -1,0 +1,8 @@
+torch 
+transformers = 4.52.4
+accelerate >= 0.30
+bitsandbytes >= 0.43
+streamlit 
+fastapi 
+uvicorn
+requests
