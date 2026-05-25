@@ -7,10 +7,15 @@ Implement:
   - load_model()   -> AutoModelForCausalLM.from_pretrained(..., torch_dtype=bfloat16)
   - a shared tokenizer
 """
-from transformers import AutoModelForCausalLM , AutoTokenizer
+from transformers import AutoModelForCausalLM , AutoTokenizer , BitsAndBytesConfig
 import torch
 
-def load_model():
-  model = AutoModelForCausalLM.from_pretrained('google/gemma-2-2b-it' , torch_dtype = torch.bfloat16)
+qunatize_int8_config = BitsAndBytesConfig(load_in_8bit=True)
+
+def load_model(quantize_config : bool = False):
+  if quantize_config:
+    model = AutoModelForCausalLM.from_pretrained('google/gemma-2-2b-it' , quantization_config = qunatize_int8_config , device_map = 'auto')
+  else:
+    model = AutoModelForCausalLM.from_pretrained('google/gemma-2-2b-it' , torch_dtype = torch.bfloat16)
   tokenizer = AutoTokenizer.from_pretrained('google/gemma-2-2b-it')
-  return model , tokenizer 
+  return model , tokenizer
