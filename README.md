@@ -36,7 +36,7 @@ huggingface-cli login          # Gemma 2 requires accepting Google's license
 
 | Model              | Memory | Tokens/s | Perplexity |
 |--------------------|--------|----------|------------|
-| fp16 (baseline)    | TBD    | TBD      | TBD        |
+| fp32 (baseline)    | TBD    | TBD      | TBD        |
 | int8 (from scratch)| TBD    | TBD      | TBD        |
 | int4 (from scratch)| TBD    | TBD      | TBD        |
 | bitsandbytes int8  | TBD    | TBD      | TBD        | (optional reference)

@@ -18,3 +18,8 @@ amax() returns only the max
 
 Scalling is depened on channel/feature/each row and not on the full vector so according should not do is find the abs max of the full vector and then apply the scalling rule to this , instead we need to find the scaling factor for each row and then divide this 
 
+
+All the torch parameters gets automatically transfered to gpu but the torch tensors doesn't get automatically transfered to gpu , that is why there is a need for self.register_buffer , 
+eg the mask in the causal attention need to be filled in the register buffer so that it can be transfered to gpu , we are not decalring it as nn.Parameter as we don't want the model to train this mask and usually all the nn.Parameters are trained 
+
+originally the line W_float32 = W.float32 was crashing the system because the memory was overfilled , this is because this created a copy of the weights that we orginally in float32 so removing it reduced the memory required
